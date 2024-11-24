@@ -13,7 +13,7 @@ import Swamp from "./Swamp";
 import Wishlist from "./Wishlist";
 import Weather from "./Weather";
 
-const socket = io('http://localhost:5000');
+const socket = io('https://portfolio-site-oq4q.onrender.com');
 
 function App() {
 

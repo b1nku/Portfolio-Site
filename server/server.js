@@ -11,7 +11,8 @@ const PORT = process.env.PORT || 5000;
 
 const io = socketIo(server, {
     cors: {
-        origin: "*",
+        origin: "https://killmouski.com",
+        methods: ["GET", "POST"],
     },
 });
 app.use(cors());
