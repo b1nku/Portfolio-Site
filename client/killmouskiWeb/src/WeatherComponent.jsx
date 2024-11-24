@@ -22,8 +22,8 @@ const WeatherComponent = () => {
         const fetchAndStoreWeather = async () => {
             try {
                 if (location.latitude && location.longitude) {
-                    const postResponse = await axios.post("/api/weather", location);
-                    const getResponse = await axios.get("/api/weather");
+                    const postResponse = await axios.post("https://portfolio-site-oq4q.onrender.com/api/weather", location);
+                    const getResponse = await axios.get("https://portfolio-site-oq4q.onrender.com/api/weather");
                     setWeather(getResponse.data);
                 }
             } catch (err) {
