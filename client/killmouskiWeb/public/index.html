@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Killmouski</title>
+    <meta name="description" content="A portfolio website for birkes and ansie">
+    <script>
+        (function () {
+
+            // JavaScript snippet handling Dark/Light mode switching
+
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const setStoredTheme = theme => localStorage.setItem('theme', theme);
+            const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+            const getPreferredTheme = () => {
+
+                if (forcedTheme) return forcedTheme;
+
+                const storedTheme = getStoredTheme();
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+                if (pageTheme) {
+                    return pageTheme;
+                }
+
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme);
+                }
+            }
+
+            setTheme(getPreferredTheme());
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+                if (!themeSwitchers.length) return;
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active');
+                    element.setAttribute('aria-pressed', 'false');
+                });
+
+                for (const themeSwitcher of themeSwitchers) {
+
+                    const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+                    if (btnToActivate) {
+                        btnToActivate.classList.add('active');
+                        btnToActivate.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme());
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme());
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const theme = toggle.getAttribute('data-bs-theme-value');
+                            setStoredTheme(theme);
+                            setTheme(theme);
+                            showActiveTheme(theme);
+                        })
+                    })
+            });
+        })();
+    </script>
+    <script>
+        // Listen for messages from the parent window
+        window.addEventListener("message", (event) => {
+            if (event.data.type === "themeChange") {
+                // Apply the received theme
+                document.documentElement.setAttribute("data-bs-theme", event.data.theme);
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="assets/css/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+</head>
+
+<body style="background: var(--bs-primary);">
+    <main class="page">
+        <section class="clean-block clean-hero" style="color: rgba(255,255,255,0);background: url(&quot;assets/img/tech/burt.jpg&quot;) center / auto, rgba(255,255,255,0);filter: hue-rotate(0deg) saturate(97%);box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.41);">
+            <div class="text" style="backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);background: rgba(192,167,217,0.7);border-radius: 0.375rem;">
+                <h2>a team of game developers</h2>
+                <p style="padding-right: 10px;padding-left: 10px;">we strive to create good games, and this website<br>will serve as our portfolio for past and future<br>projects :3</p>
+            </div>
+        </section>
+        <section class="clean-block clean-info dark" style="background: var(--bs-secondary);">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="block-heading" style="padding: 0px 0px 0px;margin: 40px 0px 40px;">
+                            <h2 class="text-info">ansie</h2>
+                            <p>studies game development and learning technologies at University of Southern Denmark (SDU)<br>has passion for character design, story-telling and ui/ux</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="block-heading" style="padding: 0px 0px 0px;margin: 40px 0px 40px;">
+                            <h2 class="text-info">birkes</h2>
+                            <p>studies game development and learning technologies at University of Southern Denmark (SDU)<br>enjoys game theory, design and programming<br><br></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/Screenshot%202023-05-17%20003046.jpg"></div>
+                    <div class="col-md-6">
+                        <h3 style="margin: 0px;margin-top: 30px;">fisx: multiplayer physics sandbox</h3>
+                        <h4 style="text-align: right;font-size: 18px;">2023</h4>
+                        <div>
+                            <p style="font-size: 15px;">one of our initial projects had us working with multiplayer networking in unity - birkes wanted to explore gameplay as a physics-driven playground approach, where ansie wanted to package this in a pleasant pastel-colour palette with stark contrasts via celshading.<br><br>the game had drivable vehicles with physical suspensions, which reacted to the cargo weight - the players could pick up and transport packages of varying sizes and weights, and reacted realistically to these.<br><br>ansie gained experience with working in unity, by creating stylistic models for it and working with the universal render pipeline<br><br>birkes gained experience with approaching physics problems programmatically and networking in unity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="clean-block" style="background: var(--bs-primary);">
+            <div class="container">
+                <div class="block-heading"><a href="about-us.html">
+                        <h2 class="text-info">about us</h2>
+                    </a>
+                    <p>we are a dedicated team quickly gaining valuable experience with creating games and learning technologies for the youth</p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/IMG_3646.jpeg">
+                            <div class="card-body info">
+                                <h4 class="card-title">anne-sofie 'ansie' w.</h4>
+                                <p class="card-text">Game Development and Learning Technologies, SDU</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/IMG_5427.jpg">
+                            <div class="card-body info">
+                                <h4 class="card-title">birk 'birkes' e.s.</h4>
+                                <p class="card-text">Game Development and Learning Technologies, SDU</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/IMG_5357.jpg">
+                            <div class="card-body info">
+                                <h4 class="card-title">beatrice 'kitty' mctiddy killmouski bartholomew XIV</h4>
+                                <p class="card-text">cat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="background" style="width: 33%;height: 300px;z-index: 100;background: rgba(255,0,0,0.29);margin-right: 40px;top: 70px;bottom: 60%;left: 70%;position: sticky;">
+        <p>Paragraph</p>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
