@@ -18,7 +18,7 @@ const socket = io('https://portfolio-site-oq4q.onrender.com');
 function App() {
 
     return (
-        <Router basename="/Portfolio-Site">
+        <Router >
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
