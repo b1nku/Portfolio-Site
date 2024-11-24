@@ -18,7 +18,7 @@ const socket = io('http://localhost:5000');
 function App() {
 
     return (
-        <Router>
+        <Router basename="/Portfolio-Site">
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
