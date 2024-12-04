@@ -13,6 +13,8 @@ Project setup:
 Built version is live on killmouski.com -> this version talks to a MongoDB Atlas cluster
 Dev version is on the master branch on this repository:
 
+
+## Switch to the master branch for all the content :D
 Master-branch:
 client and server folder for front and backend.
 
